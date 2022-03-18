@@ -58,9 +58,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, "/api/states").permitAll()
 				.antMatchers(HttpMethod.DELETE, "/api/states/*").permitAll()
 				.anyRequest().authenticated()
-				.and().csrf().disable();
-//				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//				.and().addFilterBefore(new AutenticationThroughTokenFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
+				.and().csrf().disable()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and().addFilterBefore(new AutenticationThroughTokenFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
 	}
 
 }
