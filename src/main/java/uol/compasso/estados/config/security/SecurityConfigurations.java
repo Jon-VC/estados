@@ -44,17 +44,23 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/api/states").permitAll()
+				.antMatchers(HttpMethod.GET, "/h2-console").permitAll()
+				.antMatchers(HttpMethod.GET, "/h2-console/*").permitAll()
+				.antMatchers(HttpMethod.POST, "/h2-console/*").permitAll()
+				.antMatchers(HttpMethod.POST, "/h2-console").permitAll()
+				.antMatchers(HttpMethod.PUT, "/h2-console").permitAll()
+				.antMatchers(HttpMethod.PUT, "/h2-console/*").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/states/*").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/states:stateList").permitAll()
+				.antMatchers(HttpMethod.GET, "/actuator").permitAll()
 				.antMatchers(HttpMethod.PUT, "/api/states/*").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/auth").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/states").permitAll()
-				.antMatchers(HttpMethod.GET, "/actuator").permitAll()
 				.antMatchers(HttpMethod.DELETE, "/api/states/*").permitAll()
 				.anyRequest().authenticated()
-				.and().csrf().disable()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and().addFilterBefore(new AutenticationThroughTokenFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
+				.and().csrf().disable();
+//				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//				.and().addFilterBefore(new AutenticationThroughTokenFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
 	}
 
 }
