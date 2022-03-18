@@ -9,12 +9,12 @@ import javax.persistence.Id;
 
 @Entity
 public class Profile implements GrantedAuthority {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String nome;
 
 	public Long getId() {
@@ -37,5 +37,5 @@ public class Profile implements GrantedAuthority {
 	public String getAuthority() {
 		return nome;
 	}
-	
+
 }

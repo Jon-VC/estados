@@ -12,13 +12,13 @@ import java.util.List;
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
 	private String keyWord;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Profile> profiles = new ArrayList<>();
 

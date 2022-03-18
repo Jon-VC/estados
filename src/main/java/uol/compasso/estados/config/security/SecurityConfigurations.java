@@ -55,5 +55,5 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().addFilterBefore(new AutenticationThroughTokenFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
 	}
-	
+
 }

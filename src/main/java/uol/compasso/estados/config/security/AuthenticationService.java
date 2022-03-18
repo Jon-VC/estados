@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 public class AuthenticationService implements UserDetailsService {
-	
+
 	@Autowired
 	private UserRepository repository;
 
@@ -22,7 +22,7 @@ public class AuthenticationService implements UserDetailsService {
 		if (user.isPresent()) {
 			return user.get();
 		}
-		
+
 		throw new UsernameNotFoundException("Dados inválidos!");
 	}
 
