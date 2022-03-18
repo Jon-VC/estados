@@ -8,7 +8,7 @@ public class State {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Region region;
 	private String population;
 	private String capital;
