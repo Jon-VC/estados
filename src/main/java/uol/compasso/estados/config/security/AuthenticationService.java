@@ -11,7 +11,7 @@ import uol.compasso.estados.repository.UserRepository;
 import java.util.Optional;
 
 @Service
-public class AutenticationService implements UserDetailsService {
+public class AuthenticationService implements UserDetailsService {
 	
 	@Autowired
 	private UserRepository repository;

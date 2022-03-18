@@ -7,7 +7,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,7 +19,7 @@ import uol.compasso.estados.repository.UserRepository;
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private AutenticationService autenticacaoService;
+	private AuthenticationService authenticationService;
 
 	@Autowired
 	private TokenService tokenService;
@@ -36,13 +35,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	//Configuracoes de autenticacao
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
-	}
-
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring()
-				.antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
+		auth.userDetailsService(authenticationService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	//Configuracoes de autorizacao
@@ -51,8 +44,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/api/states").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/states/*").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/states:stateList").permitAll()
 				.antMatchers(HttpMethod.PUT, "/api/states/*").permitAll()
-				.antMatchers(HttpMethod.POST, "/auth").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/auth").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/states").permitAll()
 				.antMatchers(HttpMethod.GET, "/actuator").permitAll()
 				.antMatchers(HttpMethod.DELETE, "/api/states/*").permitAll()

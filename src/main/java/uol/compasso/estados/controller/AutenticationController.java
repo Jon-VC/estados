@@ -32,7 +32,7 @@ public class AutenticationController {
 
         try {
             Authentication authentication = authManager.authenticate(dataLogin);
-            String token = tokenService.gerarToken(authentication);
+            String token = tokenService.generateToken(authentication);
             return ResponseEntity.ok(new TokenDto(token, "Bearer"));
         }catch (AuthenticationException e){
             return ResponseEntity.badRequest().build();

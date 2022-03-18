@@ -1,11 +1,6 @@
 package uol.compasso.estados.modelo;
 
-import org.springframework.data.domain.Page;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class State {
@@ -13,19 +8,20 @@ public class State {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String region;
+	@Enumerated
+	private Region region;
 	private String population;
-	private String Capital;
+	private String capital;
 	private float areaSize;
 
 	public State() {
 	}
 
-	public State(String name, String region, String population, String capital, float areaSize) {
+	public State(String name, Region region, String population, String capital, float areaSize) {
 		this.name = name;
 		this.region = region;
 		this.population = population;
-		Capital = capital;
+		this.capital = capital;
 		this.areaSize = areaSize;
 	}
 
@@ -37,7 +33,7 @@ public class State {
 		return name;
 	}
 
-	public String getRegion() {
+	public Region getRegion() {
 		return region;
 	}
 
@@ -46,7 +42,7 @@ public class State {
 	}
 
 	public String getCapital() {
-		return Capital;
+		return capital;
 	}
 
 	public float getAreaSize() {
@@ -57,12 +53,12 @@ public class State {
 		this.name = name;
 	}
 
-	public void setRegion(String region) {
+	public void setRegion(Region region) {
 		this.region = region;
 	}
 
 	public void setCapital(String capital) {
-		Capital = capital;
+		this.capital = capital;
 	}
 
 	public void setPopulation(String population) {

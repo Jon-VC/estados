@@ -13,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import uol.compasso.estados.controller.dto.StatesDto;
 import uol.compasso.estados.controller.form.StateForm;
 import uol.compasso.estados.controller.form.UptadeStateForm;
+import uol.compasso.estados.modelo.Region;
 import uol.compasso.estados.modelo.State;
 import uol.compasso.estados.repository.StateRepository;
 
@@ -30,14 +31,14 @@ public class StatesRegistriesController {
 	
 	@GetMapping("/api/states")
 	@Cacheable(value = "statesList")
-	public Page<StatesDto> list(@RequestParam(required = false) String region,
+	public Page<StatesDto> list(@RequestParam(required = false) Region region,
 								@RequestParam(required = false) String population,
 								@RequestParam(required = false) String areaSize,
 								@PageableDefault(sort = "id", direction = Direction.ASC) Pageable pageable) {
 
 		Page<State> state;
 		if (region != null) {
-			state = stateRepository.findByName(region, pageable);
+			state = stateRepository.findByName(String.valueOf(region), pageable);
 			return StatesDto.convert(state);
 		} else if (population != null){
 		state = stateRepository.findByName(population, pageable);

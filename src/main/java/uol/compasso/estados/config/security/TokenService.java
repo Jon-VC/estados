@@ -19,7 +19,7 @@ public class TokenService {
     @Value("${forum.jwt.secret}")
     private String secret;
 
-    public String gerarToken(Authentication authentication){
+    public String generateToken(Authentication authentication){
         User logged = (User) authentication.getPrincipal();
         Date today = new Date();
         Date dateExpiration = new Date(today.getTime() + Long.parseLong(expiration));

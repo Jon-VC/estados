@@ -1,6 +1,7 @@
 package uol.compasso.estados.controller.form;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import uol.compasso.estados.modelo.Region;
 import uol.compasso.estados.modelo.State;
 import uol.compasso.estados.repository.StateRepository;
 
@@ -15,8 +16,7 @@ public class UptadeStateForm {
 	@NotNull @NotEmpty
 	private String name;
 	
-	@NotNull @NotEmpty
-	private String region;
+	private Region region;
 
 	@NotNull @NotEmpty
 	private String population;
@@ -31,7 +31,7 @@ public class UptadeStateForm {
 		this.name = name;
 	}
 
-	public void setRegion(String region) {
+	public void setRegion(Region region) {
 		this.region = region;
 	}
 
