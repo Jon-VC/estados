@@ -36,6 +36,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(authenticationService).passwordEncoder(new BCryptPasswordEncoder());
+
 	}
 
 	//Configuracoes de autorizacao
@@ -57,3 +58,4 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	}
 
 }
+

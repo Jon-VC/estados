@@ -17,7 +17,7 @@ public class User implements UserDetails {
 	private Long id;
 	private String name;
 	private String email;
-	private String keyWord;
+	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Profile> profiles = new ArrayList<>();
@@ -71,12 +71,8 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 
-	public String getKeyWord() {
-		return keyWord;
-	}
-
-	public void setKeyWord(String keyWord) {
-		this.keyWord = keyWord;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
@@ -86,7 +82,7 @@ public class User implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return this.keyWord;
+		return this.password;
 	}
 
 	@Override

@@ -23,13 +23,13 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/states")
+@RequestMapping("/api")
 public class StatesRegistriesController {
 	
 	@Autowired
 	private StateRepository stateRepository;
 	
-	@GetMapping("/api/states")
+	@GetMapping("/states")
 	@Cacheable(value = "statesList")
 	public Page<StatesDto> list(@RequestParam(required = false) Region region,
 								@RequestParam(required = false) String population,
@@ -52,7 +52,7 @@ public class StatesRegistriesController {
 		}
 	}
 	
-	@PostMapping("/api/states")
+	@PostMapping("/states")
 	@Transactional
 	@CacheEvict(value = "stateList", allEntries = true)
 	public ResponseEntity<StatesDto> register(@RequestBody @Valid StateForm form, UriComponentsBuilder uriBuilder) {
@@ -63,7 +63,7 @@ public class StatesRegistriesController {
 		return ResponseEntity.created(uri).body(new StatesDto(state));
 	}
 	
-	@PutMapping("/api/state/{id}")
+	@PutMapping("/states/{id}")
 	@Transactional
 	@CacheEvict(value = "stateList", allEntries = true)
 	public ResponseEntity<StatesDto> update(@PathVariable Long id, @RequestBody @Valid UptadeStateForm form) {
@@ -76,7 +76,7 @@ public class StatesRegistriesController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@DeleteMapping("/api/state/{id}")
+	@DeleteMapping("/states/{id}")
 	@Transactional
 	@CacheEvict(value = "stateList", allEntries = true)
 	public ResponseEntity<?> remove(@PathVariable Long id) {
