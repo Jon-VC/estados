@@ -1,0 +1,101 @@
+openapi: 3.0.1
+info:
+  title: API de cadastro de estados
+  description: API para cadastrar e visualizar cadastros de estados
+  version: 0.0.1
+servers:
+- url: https://localhost:8080/api
+  description: API de Teste
+paths:
+  /states:
+    get:
+      summary: Lista 
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "https://localhost:8080/api/states"
+    post:
+      summary: Cadastra um novo estado
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descricao:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "https://localhost:8080/api/states"
+  /api/states/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      summary: Recupera uma entidade pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "https://localhost:8080/api/states/{id}"
+        404:
+          description: Estado não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    put:
+      summary: Atualiza uma entidade pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "https://localhost:8080/api/states/{id}"
+        404:
+          description: Estado não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      summary: Deleta uma entidade pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "https://localhost:8080/api/states/{id}"
+        404:
+          description: Estado não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+security: 
+- auth: []
+components:
+  schemas:
+    State:
+      type: object
+      properties:
+        id:
+          type: integer
+        descricao:
+          type: string
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
